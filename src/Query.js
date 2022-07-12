@@ -1,19 +1,26 @@
 const githubQuery = {
-    query: `
+  query: `
       {
         viewer {
           name
-          repositories(first:10) {
+        }
+          search(query: "user:juancarlosdnz sort:updated-desc", type: REPOSITORY, first:30) {
             nodes {
+              ... on Repository {
                 name
                 description
                 id
                 url
+                viewerSubscription
+                licenseInfo {
+                  spdxId
+                }
             }
           }
         }
       }
-    `,
+    `
+  ,
 };
 
 export default githubQuery
